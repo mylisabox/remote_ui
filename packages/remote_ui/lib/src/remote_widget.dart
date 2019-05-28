@@ -34,6 +34,13 @@ class RemoteWidgetFactory {
 
   RemoteWidgetFactory(this._customParsers);
 
+  EdgeInsets getEdgeInsets(Map<String, dynamic> definition) {
+    if(definition == null) {
+      return null;
+    }
+    return EdgeInsets.fromLTRB(definition['left'] ?? .0, definition['top'] ?? .0, definition['right'] ?? .0, definition['bottom'] ?? .0);
+  }
+
   Widget fromJson(BuildContext context, Map<String, dynamic> definition) {
     if (definition == null) {
       return null;

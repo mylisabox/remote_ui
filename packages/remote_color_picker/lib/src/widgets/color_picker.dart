@@ -11,9 +11,13 @@ class ColorPicker extends HookWidget {
   final bool enableAlpha;
   final bool enableLabel;
   final double pickerAreaHeightPercent;
+  final double buttonWidth;
+  final double buttonHeight;
   final picker.PaletteType paletteType;
 
   ColorPicker({
+    this.buttonWidth,
+    this.buttonHeight,
     this.initialValue,
     this.id,
     this.paletteType,
@@ -30,14 +34,17 @@ class ColorPicker extends HookWidget {
 
     return Center(
       child: Container(
+        width: buttonWidth,
+        height: buttonHeight,
         color: valueState.value,
-        width: 50,
-        height: 50,
-        child: InkWell(
-          onTap: () {
-            _showDialog(context, valueState);
-          },
-          child: Container(),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              _showDialog(context, valueState);
+            },
+            child: Center(child: Container()),
+          ),
         ),
       ),
     );

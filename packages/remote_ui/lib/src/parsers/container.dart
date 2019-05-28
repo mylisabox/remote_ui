@@ -6,7 +6,8 @@ class ContainerParser {
     return Container(
       height: definition['height'],
       width: definition['width'],
-
+      padding: factory.getEdgeInsets(definition['padding']),
+      margin: factory.getEdgeInsets(definition['margin']),
       child: factory.fromJson(context, definition['child']),
       color: definition.containsKey('color') ? Color(definition['color']) : null,
     );

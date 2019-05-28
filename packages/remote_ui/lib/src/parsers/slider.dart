@@ -7,12 +7,12 @@ class SliderParser {
     return RemoteSlider(
       initialValue: definition['value'],
       id: definition['id'],
-      inactiveColor: definition.containsKey('inactiveColor') ? definition['inactiveColor'] : null,
-      activeColor: definition.containsKey('activeColor') ? definition['activeColor'] : null,
-      min: definition.containsKey('min') ? definition['min'] : .0,
-      max: definition.containsKey('max') ? definition['max'] : 1.0,
-      divisions: definition.containsKey('divisions') ? definition['divisions'] : null,
-      label: definition.containsKey('label') ? definition['label'] : null,
+      inactiveColor: definition.containsKey('inactiveColor') ? Color(definition['inactiveColor']) : null,
+      activeColor: definition.containsKey('activeColor') ? Color(definition['activeColor']) : null,
+      min: definition['min'] ?? .0,
+      max: definition['max'] ?? 1.0,
+      divisions: definition['divisions'],
+      label: definition['label'],
     );
   }
 }
