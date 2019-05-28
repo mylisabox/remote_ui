@@ -51,6 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 onChanges: (key, value) => debugPrint('$key change to $value'),
                 child: RemoteWidget(
                   data: {
+                    'myColor': 0xFFFF00FF,
+                    'sliderData': {
+                      'sliderValue': .2,
+                    }
+                  },
+                  definition: {
                     'type': 'column',
                     'crossAxisAlignment': CrossAxisAlignment.stretch.index,
                     'children': [
@@ -61,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         'children': [
                           {
                             'type': 'container',
-                            'color': 0xFFFF00FF,
+                            'color': '\$myColor\$',
                             'width': 80.0,
                           },
                           {
@@ -81,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       {
                         'type': 'slider',
                         'id': 'brightness',
-                        'value': 0.4
+                        'value': '\$sliderData.sliderValue\$'
                       }
                     ],
                   },

@@ -14,7 +14,7 @@ import 'package:remote_ui/src/parsers/stack.dart';
 import 'package:remote_ui/src/parsers/text.dart';
 
 abstract class RemoteFactory {
-  Widget fromJson(BuildContext context, Map<String, dynamic> definition, RemoteWidgetFactory factory);
+  Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory);
 }
 
 class RemoteWidgetFactory {
@@ -34,14 +34,37 @@ class RemoteWidgetFactory {
 
   RemoteWidgetFactory(this._customParsers);
 
+  dynamic getData(Map<String, dynamic> definition, Map<String, dynamic> data, String key, {defaultValue}) {
+    final definitionData = definition[key];
+    if (definitionData is String && definitionData.startsWith('\$') && definitionData.endsWith('\$')) {
+      return _getSubData(data, definitionData, defaultValue: defaultValue);
+    }
+    return definitionData ?? defaultValue;
+  }
+
+  dynamic _getSubData(Map<String, dynamic> data, String dataKey, {defaultValue}) {
+    if (data == null || data.isEmpty) {
+      return defaultValue;
+    }
+
+    final parsedKey = dataKey.replaceAll('\$', '');
+
+    if (parsedKey.contains('.')) {
+      final parts = parsedKey.split('.');
+      return _getSubData(data[parts.first], parts.sublist(1).join('.'));
+    }
+
+    return data[parsedKey] ?? defaultValue;
+  }
+
   EdgeInsets getEdgeInsets(Map<String, dynamic> definition) {
-    if(definition == null) {
+    if (definition == null) {
       return null;
     }
     return EdgeInsets.fromLTRB(definition['left'] ?? .0, definition['top'] ?? .0, definition['right'] ?? .0, definition['bottom'] ?? .0);
   }
 
-  Widget fromJson(BuildContext context, Map<String, dynamic> definition) {
+  Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data) {
     if (definition == null) {
       return null;
     }
@@ -51,12 +74,12 @@ class RemoteWidgetFactory {
       definition.remove('flex');
       return Expanded(
         flex: flex,
-        child: fromJson(context, definition),
+        child: fromJson(context, definition, data),
       );
     }
 
     for (var parser in _customParsers) {
-      final item = parser.fromJson(context, definition, this);
+      final item = parser.fromJson(context, definition, data, this);
       if (item != null) {
         return item;
       }
@@ -64,29 +87,29 @@ class RemoteWidgetFactory {
 
     switch (definition['type']) {
       case 'center':
-        return _centerParser.parse(context, definition, this);
+        return _centerParser.parse(context, definition, data, this);
       case 'column':
-        return _columnParser.parse(context, definition, this);
+        return _columnParser.parse(context, definition, data, this);
       case 'row':
-        return _rowParser.parse(context, definition, this);
+        return _rowParser.parse(context, definition, data, this);
       case 'stack':
-        return _stackParser.parse(context, definition, this);
+        return _stackParser.parse(context, definition, data, this);
       case 'expanded':
-        return _expandedParser.parse(context, definition, this);
+        return _expandedParser.parse(context, definition, data, this);
       case 'padding':
-        return _paddingParser.parse(context, definition, this);
+        return _paddingParser.parse(context, definition, data, this);
       case 'container':
-        return _containerParser.parse(context, definition, this);
+        return _containerParser.parse(context, definition, data, this);
       case 'slider':
-        return _sliderParser.parse(context, definition, this);
+        return _sliderParser.parse(context, definition, data, this);
       case 'text':
-        return _textParser.parse(context, definition, this);
+        return _textParser.parse(context, definition, data, this);
       case 'spacer':
-        return _spacerParser.parse(context, definition, this);
+        return _spacerParser.parse(context, definition, data, this);
       case 'flat_button':
-        return _flatButtonParser.parse(context, definition, this);
+        return _flatButtonParser.parse(context, definition, data, this);
       case 'raised_button':
-        return _raisedButtonParser.parse(context, definition, this);
+        return _raisedButtonParser.parse(context, definition, data, this);
     }
     return Placeholder();
   }
@@ -94,13 +117,14 @@ class RemoteWidgetFactory {
 
 class RemoteWidget extends StatelessWidget {
   final Map<String, dynamic> data;
+  final Map<String, dynamic> definition;
 
-  const RemoteWidget({Key key, this.data}) : super(key: key);
+  const RemoteWidget({Key key, @required this.definition, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final factory = RemoteWidgetFactory(RemoteManagerWidget.of(context).parsers);
-    return factory.fromJson(context, data);
+    return factory.fromJson(context, definition, data);
   }
 }
 

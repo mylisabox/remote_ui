@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:remote_ui/remote_ui.dart';
 
 class ColorPicker extends HookWidget {
-  final Color initialValue;
+  final Color value;
   final String id;
   final double colorPickerWidth;
   final bool displayThumbColor;
@@ -18,7 +18,7 @@ class ColorPicker extends HookWidget {
   ColorPicker({
     this.buttonWidth,
     this.buttonHeight,
-    this.initialValue,
+    this.value,
     this.id,
     this.paletteType,
     this.displayThumbColor,
@@ -30,7 +30,11 @@ class ColorPicker extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final valueState = useState(initialValue);
+    final valueState = useState(value);
+
+    useEffect(() {
+      valueState.value = value;
+    }, [value]);
 
     return Center(
       child: Container(
@@ -58,8 +62,8 @@ class ColorPicker extends HookWidget {
           contentPadding: EdgeInsets.zero,
           content: SingleChildScrollView(
             child: picker.ColorPicker(
-              valueState.value,
-              (color) {
+              pickerColor: valueState.value,
+              onColorChanged: (color) {
                 valueState.value = color;
               },
               enableLabel: enableLabel,

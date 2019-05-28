@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:remote_ui/remote_ui.dart';
+import 'package:remote_ui/src/parsers/default_parser.dart';
 
-class SpacerParser {
-  Widget parse(BuildContext context, Map<String, dynamic> definition, RemoteWidgetFactory factory) {
-    return Spacer(flex: definition['flex'] ?? 1);
+class SpacerParser extends WidgetParser {
+  Widget parse(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
+    return Spacer(flex: factory.getData(definition, data, 'flex', defaultValue: 1));
   }
 }

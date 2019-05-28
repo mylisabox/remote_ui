@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:remote_ui/remote_ui.dart';
 
 class RemoteSlider extends HookWidget {
-  final double initialValue;
+  final double value;
   final String id;
   final Color inactiveColor;
   final Color activeColor;
@@ -19,13 +19,17 @@ class RemoteSlider extends HookWidget {
     this.max,
     this.divisions,
     this.label,
-    this.initialValue,
+    this.value,
     this.id,
   });
 
   @override
   Widget build(BuildContext context) {
-    final valueState = useState(initialValue);
+    final valueState = useState(value);
+
+    useEffect(() {
+      valueState.value = value;
+    }, [value]);
 
     return Slider(
       value: valueState.value,

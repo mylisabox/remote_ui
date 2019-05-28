@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 parsers: [RemoteColorPickerFactory()],
                 onChanges: (key, value) => debugPrint('$key change to $value'),
                 child: RemoteWidget(
-                  data: {
+                  definition: {
                     'type': 'column',
                     'crossAxisAlignment': CrossAxisAlignment.stretch.index,
                     'children': [

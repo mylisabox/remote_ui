@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:remote_ui/remote_ui.dart';
 
 class ColorPickerInline extends HookWidget {
-  final Color initialValue;
+  final Color value;
   final String id;
   final double colorPickerWidth;
   final bool displayThumbColor;
@@ -20,16 +20,19 @@ class ColorPickerInline extends HookWidget {
     this.enableLabel,
     this.pickerAreaHeightPercent,
     this.colorPickerWidth,
-    this.initialValue,
+    this.value,
     this.id,
   });
 
   @override
   Widget build(BuildContext context) {
-    final valueState = useState(initialValue);
+    final valueState = useState(value);
+    useEffect(() {
+      valueState.value = value;
+    }, [value]);
     return picker.ColorPicker(
-      valueState.value,
-      (color) {
+      pickerColor: valueState.value,
+      onColorChanged: (color) {
         valueState.value = color;
         RemoteManagerWidget.of(context).onChanges(id, color);
       },

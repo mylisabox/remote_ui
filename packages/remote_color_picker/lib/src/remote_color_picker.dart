@@ -8,13 +8,13 @@ class RemoteColorPickerFactory implements RemoteFactory {
   final ColorPickerParser _colorPickerParser = ColorPickerParser();
   final ColorPickerInlineParser _colorPickerInlineParser = ColorPickerInlineParser();
 
-  Widget fromJson(BuildContext context, Map<String, dynamic> definition, RemoteWidgetFactory factory) {
+  Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
 
     switch (definition['type']) {
       case 'color_picker':
-        return _colorPickerParser.parse(context, definition, factory);
+        return _colorPickerParser.parse(context, definition, data, factory);
       case 'color_picker_inline':
-        return _colorPickerInlineParser.parse(context, definition, factory);
+        return _colorPickerInlineParser.parse(context, definition, data, factory);
     }
     return null;
   }
