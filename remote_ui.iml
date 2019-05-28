@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/ios/Flutter/App.framework/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/ios/Flutter/App.framework/flutter_assets/packages" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
+  </component>
+</module>
