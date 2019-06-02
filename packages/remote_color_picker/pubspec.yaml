@@ -1,8 +1,8 @@
 name: remote_color_picker
 description: Color picker addon for remote ui package
 version: 0.0.1
-author:
-homepage:
+author: jaumard <jimmy.aumard@gmail.com>
+homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_color_picker
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
