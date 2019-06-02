@@ -35,7 +35,9 @@ class RemoteSlider extends HookWidget {
       value: valueState.value,
       onChanged: (value) {
         valueState.value = value;
-        RemoteManagerWidget.of(context).onChanges(id, value);
+      },
+      onChangeEnd: (value) {
+        RemoteManagerWidget.of(context).onChanges(id, value, associatedData: RemoteWidgetData.of(context).data);
       },
       inactiveColor: inactiveColor,
       activeColor: activeColor,

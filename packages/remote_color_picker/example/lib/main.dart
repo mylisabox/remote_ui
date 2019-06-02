@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: RemoteManagerWidget(
                 parsers: [RemoteColorPickerFactory()],
-                onChanges: (key, value) => debugPrint('$key change to $value'),
+                onChanges: (key, value, {associatedData}) => debugPrint('$key change to $value'),
                 child: RemoteWidget(
                   definition: {
                     'type': 'column',

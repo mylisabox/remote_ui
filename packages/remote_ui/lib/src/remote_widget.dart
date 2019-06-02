@@ -25,14 +25,17 @@ class RemoteWidgetFactory {
   final PaddingParser _paddingParser = PaddingParser();
   final ExpandedParser _expandedParser = ExpandedParser();
   final ContainerParser _containerParser = ContainerParser();
-  final SliderParser _sliderParser = SliderParser();
+  final SliderParser _sliderParser;
   final TextParser _textParser = TextParser();
-  final FlatButtonParser _flatButtonParser = FlatButtonParser();
-  final RaisedButtonParser _raisedButtonParser = RaisedButtonParser();
+  final FlatButtonParser _flatButtonParser;
+  final RaisedButtonParser _raisedButtonParser;
   final SpacerParser _spacerParser = SpacerParser();
   final CenterParser _centerParser = CenterParser();
 
-  RemoteWidgetFactory(this._customParsers);
+  RemoteWidgetFactory(this._customParsers)
+      : _raisedButtonParser = RaisedButtonParser(),
+        _sliderParser = SliderParser(),
+        _flatButtonParser = FlatButtonParser();
 
   dynamic getData(Map<String, dynamic> definition, Map<String, dynamic> data, String key, {defaultValue}) {
     final definitionData = definition[key];
@@ -71,10 +74,10 @@ class RemoteWidgetFactory {
 
     if (definition.containsKey('flex') && definition['type'] != 'expanded' && definition['type'] != 'spacer') {
       final flex = definition['flex'];
-      definition.remove('flex');
+
       return Expanded(
         flex: flex,
-        child: fromJson(context, definition, data),
+        child: fromJson(context, Map.from(definition)..remove('flex'), data),
       );
     }
 
@@ -115,21 +118,40 @@ class RemoteWidgetFactory {
   }
 }
 
+class RemoteWidgetData extends InheritedWidget {
+  final data;
+
+  RemoteWidgetData({this.data, Widget child}) : super(child: child);
+
+  @override
+  bool updateShouldNotify(RemoteWidgetData oldWidget) {
+    return oldWidget.data != data;
+  }
+
+  static RemoteWidgetData of(BuildContext context) {
+    return context.inheritFromWidgetOfExactType(RemoteWidgetData) as RemoteWidgetData;
+  }
+}
+
 class RemoteWidget extends StatelessWidget {
+  final associatedData;
   final Map<String, dynamic> data;
   final Map<String, dynamic> definition;
 
-  const RemoteWidget({Key key, @required this.definition, this.data}) : super(key: key);
+  const RemoteWidget({Key key, @required this.definition, this.associatedData, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final factory = RemoteWidgetFactory(RemoteManagerWidget.of(context).parsers);
-    return factory.fromJson(context, definition, data);
+    return RemoteWidgetData(
+      child: factory.fromJson(context, definition, data),
+      data: associatedData,
+    );
   }
 }
 
 class RemoteManagerWidget extends InheritedWidget {
-  final Function(String key, dynamic value) onChanges;
+  final Function(String key, dynamic value, {dynamic associatedData}) onChanges;
   final List<RemoteFactory> parsers;
 
   RemoteManagerWidget({Key key, this.onChanges, Widget child, this.parsers = const []}) : super(key: key, child: child);

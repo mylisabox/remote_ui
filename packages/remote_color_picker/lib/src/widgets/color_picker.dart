@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart' as picker;
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:remote_color_picker/src/utils/mixin.dart';
 import 'package:remote_ui/remote_ui.dart';
 
-class ColorPicker extends HookWidget {
+class ColorPicker extends HookWidget with ColorToHex {
   final Color value;
   final String id;
   final double colorPickerWidth;
@@ -14,8 +15,12 @@ class ColorPicker extends HookWidget {
   final double buttonWidth;
   final double buttonHeight;
   final picker.PaletteType paletteType;
+  final bool isOutputHexString;
+  final bool includeAlphaInHexString;
 
   ColorPicker({
+    this.isOutputHexString = false,
+    this.includeAlphaInHexString = true,
     this.buttonWidth,
     this.buttonHeight,
     this.value,
@@ -78,7 +83,8 @@ class ColorPicker extends HookWidget {
             FlatButton(
               child: const Text('Got it'),
               onPressed: () {
-                RemoteManagerWidget.of(mainContext).onChanges(id, valueState.value);
+                RemoteManagerWidget.of(mainContext).onChanges(id, isOutputHexString ? toHex(valueState.value, includeAlphaInHexString) : valueState.value.value,
+                    associatedData: RemoteWidgetData.of(mainContext).data);
                 Navigator.of(context).pop();
               },
             ),

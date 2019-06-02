@@ -6,9 +6,12 @@ import 'package:remote_ui/remote_ui.dart';
 
 class ColorPickerInlineParser extends WidgetParser with ColorHexParser {
   Widget parse(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
+    final color = factory.getData(definition, data, 'value');
     return ColorPickerInline(
       id: definition['id'],
-      value: definition.containsKey('value') ? Color(parseHex(factory.getData(definition, data, 'value'))) : Colors.black,
+      isOutputHexString: color is String,
+      includeAlphaInHexString: color is String && color.length > 7,
+      value: definition.containsKey('value') ? Color(parseHex(color)) : Colors.black,
       paletteType: definition.containsKey('paletteType') ? PaletteType.values[definition['paletteType']] : PaletteType.hsv,
       enableAlpha: definition['enableAlpha'] ?? true,
       enableLabel: definition['enableLabel'] ?? true,

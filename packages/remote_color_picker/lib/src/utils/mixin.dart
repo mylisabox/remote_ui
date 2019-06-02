@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 mixin ColorHexParser {
   int parseHex(dynamic hexColor) {
     if (hexColor is String) {
@@ -6,5 +8,15 @@ mixin ColorHexParser {
     }
 
     return hexColor;
+  }
+}
+
+mixin ColorToHex {
+  String toHex(Color color, bool includeAlpha) {
+    final hex = '#${color.value.toRadixString(16)}';
+    if (includeAlpha) {
+      return hex;
+    }
+    return hex.replaceFirst('#ff', '#');
   }
 }

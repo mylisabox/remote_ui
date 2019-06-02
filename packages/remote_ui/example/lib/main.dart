@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Expanded(
               child: RemoteManagerWidget(
-                onChanges: (key, value) => debugPrint('$key change to $value'),
+                onChanges: (key, value, {associatedData}) => debugPrint('$key change to $value'),
                 child: RemoteWidget(
                   data: {
                     'myColor': 0xFFFF00FF,
@@ -84,11 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                         ]
                       },
-                      {
-                        'type': 'slider',
-                        'id': 'brightness',
-                        'value': '\$sliderData.sliderValue\$'
-                      }
+                      {'type': 'slider', 'id': 'brightness', 'value': '\$sliderData.sliderValue\$'}
                     ],
                   },
                 ),
