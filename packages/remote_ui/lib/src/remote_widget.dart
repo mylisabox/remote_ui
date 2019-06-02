@@ -60,11 +60,19 @@ class RemoteWidgetFactory {
     return data[parsedKey] ?? defaultValue;
   }
 
-  EdgeInsets getEdgeInsets(Map<String, dynamic> definition) {
+  EdgeInsets getEdgeInsets(definition) {
     if (definition == null) {
       return null;
     }
-    return EdgeInsets.fromLTRB(definition['left'] ?? .0, definition['top'] ?? .0, definition['right'] ?? .0, definition['bottom'] ?? .0);
+    if (definition is Map) {
+      return EdgeInsets.fromLTRB(
+        definition['left']?.toDouble() ?? .0,
+        definition['top']?.toDouble() ?? .0,
+        definition['right']?.toDouble() ?? .0,
+        definition['bottom']?.toDouble() ?? .0,
+      );
+    }
+    return EdgeInsets.all(definition.toDouble());
   }
 
   Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data) {

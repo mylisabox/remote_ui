@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:remote_ui/remote_ui.dart';
 
 class ImageButton extends HookWidget {
@@ -7,12 +8,20 @@ class ImageButton extends HookWidget {
   final value;
   final values;
   final String id;
+  final double width;
+  final double height;
+  final BoxFit fit;
+  final EdgeInsets padding;
 
   ImageButton({
+    this.width,
+    this.fit,
+    this.height,
     this.baseUrlProvider,
     this.value,
     this.values,
     this.id,
+    this.padding,
   });
 
   @override
@@ -22,6 +31,8 @@ class ImageButton extends HookWidget {
     useEffect(() {
       valueState.value = value;
     }, [value]);
+
+    final url = prefixWithBaseUrl(values == null ? valueState.value : values[valueState.value]);
 
     return Material(
       color: Colors.transparent,
@@ -36,7 +47,7 @@ class ImageButton extends HookWidget {
                 break;
               }
             }
-          } else {
+          } else if (values != null) {
             if (valueState.value + 1 >= values.length) {
               valueState.value = 0;
             } else {
@@ -45,7 +56,22 @@ class ImageButton extends HookWidget {
           }
           RemoteManagerWidget.of(context).onChanges(id, valueState.value, associatedData: RemoteWidgetData.of(context).data);
         },
-        child: Image.network(prefixWithBaseUrl(values[valueState.value])),
+        child: Padding(
+          child: url.endsWith('.svg')
+              ? SvgPicture.network(
+                  url,
+                  height: height,
+                  width: width,
+                  fit: fit,
+                )
+              : Image.network(
+                  url,
+                  width: width,
+                  height: height,
+                  fit: fit,
+                ),
+          padding: padding,
+        ),
       ),
     );
   }

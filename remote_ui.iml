@@ -21,9 +21,6 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/build/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/.pub" />
