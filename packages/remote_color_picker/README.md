@@ -1,14 +1,50 @@
 # remote_color_picker
 
-Flutter widget to manage UI from a JSON definition
+Flutter widget to manage Color picker UI from a JSON definition
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+Add the factory to the RemoteManagerWidget:
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```
+RemoteManagerWidget(
+    parsers: [RemoteColorPickerFactory()],
+    child: RemoteWidget(...)
+)
+``` 
+
+Then you can provide a JSON representation of a color picker like this:
+
+```
+{
+    'type': 'color_picker',
+    'id': 'myColor',
+    'value': 0XFFFF0000,
+},
+```
+
+or inline:
+```
+{
+    'type': 'color_picker_inline',
+    'id': 'myColor',
+    'value': 0XFFFF0000,
+},
+```
+
+## API
+Color picker:
+
+`id` : id of the widget
+`buttonWidth` : width of the color button, default 35, only if not inline
+`buttonHeight`: height of the color button, default 35, only if not inline
+`value` : hex integer or string representation of a color
+`enableAlpha`: enable alpha slider, default true
+`enableLabel`: enable label, default true
+`colorPickerWidth`: color picker width, default to 300
+`pickerAreaHeightPercent`: picker are height in percent, default 1, double between 0-1
+`displayThumbColor`: display thumb color, default to false
+`paletteType`: palette type, default to hsv (0), hsv:0, hsl:1
+`paletteType`: palette type, default to hsv (0), hsv:0, hsl:1
+
+
