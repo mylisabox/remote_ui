@@ -45,7 +45,7 @@ class ColorPicker extends HookWidget with ColorToHex {
       child: Container(
         width: buttonWidth,
         height: buttonHeight,
-        color: valueState.value,
+        decoration: BoxDecoration(border: Border.all(color: Colors.black), color: valueState.value),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -81,7 +81,13 @@ class ColorPicker extends HookWidget with ColorToHex {
           ),
           actions: <Widget>[
             FlatButton(
-              child: const Text('Got it'),
+              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text(MaterialLocalizations.of(context).okButtonLabel),
               onPressed: () {
                 RemoteManagerWidget.of(mainContext).onChanges(id, isOutputHexString ? toHex(valueState.value, includeAlphaInHexString) : valueState.value.value,
                     associatedData: RemoteWidgetData.of(mainContext).data);

@@ -15,6 +15,13 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/ios/Flutter/App.framework/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/example/build/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/example/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/example/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/build" />

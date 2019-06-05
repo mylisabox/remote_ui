@@ -122,6 +122,7 @@ class RemoteWidgetFactory {
       case 'raised_button':
         return _raisedButtonParser.parse(context, definition, data, this);
     }
+    debugPrint(definition['type'] + ' is not currently supported by remote_ui');
     return Placeholder();
   }
 }
@@ -152,7 +153,7 @@ class RemoteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final factory = RemoteWidgetFactory(RemoteManagerWidget.of(context).parsers);
     return RemoteWidgetData(
-      child: factory.fromJson(context, definition, data),
+      child: Builder(builder: (context) => factory.fromJson(context, definition, data)),
       data: associatedData,
     );
   }

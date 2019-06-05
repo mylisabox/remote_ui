@@ -77,6 +77,9 @@ class ImageButton extends HookWidget {
   }
 
   String prefixWithBaseUrl(String value) {
+    if (value == null) {
+      return null;
+    }
     if (value.startsWith('http')) {
       return value;
     }

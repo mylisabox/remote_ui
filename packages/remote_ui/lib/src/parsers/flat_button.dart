@@ -10,7 +10,11 @@ class FlatButtonParser extends WidgetParser {
         RemoteManagerWidget.of(context)
             .onChanges(factory.getData(definition, data, 'id'), factory.getData(definition, data, 'value'), associatedData: RemoteWidgetData.of(context).data);
       },
-      child: factory.fromJson(context, definition['child'], data) ?? Text(factory.getData(definition, data, 'text', defaultValue: '')),
+      child: factory.fromJson(context, definition['child'], data) ??
+          Text(
+            factory.getData(definition, data, 'text', defaultValue: '').toString(),
+            textAlign: TextAlign.center,
+          ),
     );
   }
 }
