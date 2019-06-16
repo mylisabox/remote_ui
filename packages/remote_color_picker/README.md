@@ -2,6 +2,8 @@
 
 Flutter widget to manage Color picker UI from a JSON definition
 
+This is a [Remote UI plugin][remote_ui].
+
 ## Usage
 
 Add the factory to the RemoteManagerWidget:
@@ -47,4 +49,4 @@ Color picker:
 `paletteType`: palette type, default to hsv (0), hsv:0, hsl:1
 `paletteType`: palette type, default to hsv (0), hsv:0, hsl:1
 
-
+[remote_ui]: https://github.com/jaumard/remote_ui/tree/master/packages/remote_ui

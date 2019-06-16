@@ -11,8 +11,9 @@ dependencies:
   flutter_colorpicker: ^0.2.5
     #git:
     #  url: https://github.com/mchome/flutter_colorpicker
-  remote_ui:
-    path: '../remote_ui'
+  flutter_hooks: ^0.5.0
+  remote_ui: ^0.0.1
+    #path: '../remote_ui'
   flutter:
     sdk: flutter
 

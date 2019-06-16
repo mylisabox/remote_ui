@@ -17,8 +17,6 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  remote_ui:
-    path: '../../remote_ui'
   remote_image_button:
     path: '../'
   flutter:
