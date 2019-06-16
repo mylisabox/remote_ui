@@ -103,12 +103,12 @@ packages:
     source: path
     version: "0.0.1"
   remote_ui:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: "../../remote_ui"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: remote_ui
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
