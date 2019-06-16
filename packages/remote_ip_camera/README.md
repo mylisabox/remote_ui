@@ -10,24 +10,19 @@ Add the factory to the RemoteManagerWidget:
 
 ```
 RemoteManagerWidget(
-    parsers: [RemoteImageButtonFactory()],
+    parsers: [RemoteIpCameraFactory()],
     child: RemoteWidget(...)
 )
 ``` 
-
-`RemoteImageButtonFactory` can take a base url provider function, in case you definition contains only `/image/on.jpg` the base url will be taken from the provider
 
 Then you can provide a JSON representation of a color picker like this:
 
 ```
 {
-    'type': 'image_button',
-    'id': 'myButton',
-    'value': 'on',
-    'values': {
-      'on': 'http://chittagongit.com/download/17966',
-      'off': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRS1i8ftLBJX74FnwordRN5vQ5IgUy9rjkR1R2ODiBjWZThKoEHA',
-    }
+    'type': 'camera',
+    'id': 'camera',
+    'stream': 'http://domain.com/stream',
+    'preview': 'http://domain.com/preview'
 }
 ```
 
