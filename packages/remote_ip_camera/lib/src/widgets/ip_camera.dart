@@ -24,6 +24,12 @@ class IpCamera extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isPlaying = useState(false);
+    final streamState = useState(stream);
+
+    useEffect(() {
+      streamState.value = stream;
+    }, [stream]);
+
     final color = this.color ?? Theme.of(context).primaryColor;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,33 +46,29 @@ class IpCamera extends HookWidget {
             ),
             if (!isPlaying.value)
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  streamState.value = '$stream?timestamp=${DateTime.now().millisecondsSinceEpoch}';
+                },
                 color: color,
                 icon: Icon(Icons.refresh),
               ),
           ],
         ),
         Expanded(
-          child: isPlaying.value
-              ? Mjpeg(
-                  stream: stream,
-                  fit: fit,
-                  width: width,
-                  height: height,
-                )
-              : preview == null
-                  ? Container()
-                  : Image.network(
-                      preview,
-                      fit: fit,
-                    ),
+          child: Mjpeg(
+            stream: stream,
+            fit: fit,
+            isLive: isPlaying.value,
+            width: width,
+            height: height,
+          ),
         ),
         Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             IconButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (BuildContext context) {
                   return Stack(
                     children: [
                       Center(
