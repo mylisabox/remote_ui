@@ -89,6 +89,15 @@ class RemoteWidgetFactory {
       );
     }
 
+    if (definition.containsKey('padding') && definition['type'] != 'padding' && definition['type'] != 'container') {
+      final padding = definition['padding'];
+
+      return Padding(
+        padding: getEdgeInsets(padding),
+        child: fromJson(context, Map.from(definition)..remove('padding'), data),
+      );
+    }
+
     for (var parser in _customParsers) {
       final item = parser.fromJson(context, definition, data, this);
       if (item != null) {

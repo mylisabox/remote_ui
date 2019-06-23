@@ -28,6 +28,7 @@ class IpCamera extends HookWidget {
 
     useEffect(() {
       streamState.value = stream;
+      return null;
     }, [stream]);
 
     final color = this.color ?? Theme.of(context).primaryColor;
