@@ -29,6 +29,7 @@ class RemoteSlider extends HookWidget {
 
     useEffect(() {
       valueState.value = value;
+      return null;
     }, [value]);
 
     return Slider(

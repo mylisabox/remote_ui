@@ -1,0 +1,22 @@
+name: remote_form
+description: Form addon for remote ui package
+version: 0.0.1
+author: jaumard <jimmy.aumard@gmail.com>
+homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_form
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  flutter_hooks: ^0.6.0
+  remote_ui: #^0.0.3
+    path: '../remote_ui'
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# The following section is specific to Flutter.
+flutter:

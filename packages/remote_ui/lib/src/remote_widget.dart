@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:remote_ui/remote_ui.dart';
 import 'package:remote_ui/src/parsers/center.dart';
+import 'package:remote_ui/src/parsers/checkbox.dart';
 import 'package:remote_ui/src/parsers/column.dart';
 import 'package:remote_ui/src/parsers/container.dart';
+import 'package:remote_ui/src/parsers/dropdown_button.dart';
 import 'package:remote_ui/src/parsers/expanded.dart';
 import 'package:remote_ui/src/parsers/flat_button.dart';
 import 'package:remote_ui/src/parsers/padding.dart';
+import 'package:remote_ui/src/parsers/radio.dart';
 import 'package:remote_ui/src/parsers/raised_button.dart';
 import 'package:remote_ui/src/parsers/row.dart';
 import 'package:remote_ui/src/parsers/slider.dart';
 import 'package:remote_ui/src/parsers/spacer.dart';
 import 'package:remote_ui/src/parsers/stack.dart';
+import 'package:remote_ui/src/parsers/switch.dart';
 import 'package:remote_ui/src/parsers/text.dart';
+import 'package:remote_ui/src/parsers/text_field.dart';
 
 abstract class RemoteFactory {
   Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory);
 }
 
-class RemoteWidgetFactory {
+class RemoteWidgetFactory with ColorHexParser {
   final List<RemoteFactory> _customParsers;
   final ColumnParser _columnParser = ColumnParser();
   final RowParser _rowParser = RowParser();
@@ -31,6 +37,11 @@ class RemoteWidgetFactory {
   final RaisedButtonParser _raisedButtonParser;
   final SpacerParser _spacerParser = SpacerParser();
   final CenterParser _centerParser = CenterParser();
+  final TextFieldParser _textFieldParser = TextFieldParser();
+  final DropdownButtonParser _dropdownButtonParser = DropdownButtonParser();
+  final CheckboxParser _checkboxParser = CheckboxParser();
+  final RadioParser _radioParser = RadioParser();
+  final SwitchParser _switchParser = SwitchParser();
 
   RemoteWidgetFactory(this._customParsers)
       : _raisedButtonParser = RaisedButtonParser(),
@@ -73,6 +84,37 @@ class RemoteWidgetFactory {
       );
     }
     return EdgeInsets.all(definition.toDouble());
+  }
+
+  InputDecoration getInputDecoration(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data) {
+    if (definition == null) {
+      return InputDecoration();
+    }
+
+    return InputDecoration(
+      hintMaxLines: definition['hintMaxLines'],
+      hintText: definition['hintText'],
+      errorText: definition['errorText'],
+      alignLabelWithHint: definition['alignLabelWithHint'] ?? false,
+      labelText: definition['labelText'],
+      counterText: definition['counterText'],
+      enabled: definition['enabled'] ?? true,
+      errorMaxLines: definition['errorMaxLines'],
+      filled: definition['filled'] ?? false,
+      fillColor: definition.containsKey('fillColor') ? Color(parseHex(definition['fillColor'])) : null,
+      hasFloatingPlaceholder: definition['hasFloatingPlaceholder'] ?? true,
+      helperText: definition['helperText'],
+      isDense: definition['isDense'] ?? false,
+      prefixText: definition['prefixText'],
+      semanticCounterText: definition['semanticCounterText'],
+      suffixText: definition['suffixText'],
+      counter: fromJson(context, definition['counter'], data),
+      prefixIcon: fromJson(context, definition['prefixIcon'], data),
+      suffixIcon: fromJson(context, definition['suffixIcon'], data),
+      icon: fromJson(context, definition['icon'], data),
+      prefix: fromJson(context, definition['prefix'], data),
+      suffix: fromJson(context, definition['suffix'], data),
+    );
   }
 
   Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data) {
@@ -130,6 +172,16 @@ class RemoteWidgetFactory {
         return _flatButtonParser.parse(context, definition, data, this);
       case 'raised_button':
         return _raisedButtonParser.parse(context, definition, data, this);
+      case 'text_field':
+        return _textFieldParser.parse(context, definition, data, this);
+      case 'checkbox':
+        return _checkboxParser.parse(context, definition, data, this);
+      case 'radio':
+        return _radioParser.parse(context, definition, data, this);
+      case 'switch':
+        return _switchParser.parse(context, definition, data, this);
+      case 'dropdown_button':
+        return _dropdownButtonParser.parse(context, definition, data, this);
     }
     debugPrint(definition['type'] + ' is not currently supported by remote_ui');
     return Placeholder();
@@ -160,7 +212,7 @@ class RemoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final factory = RemoteWidgetFactory(RemoteManagerWidget.of(context).parsers);
+    final factory = RemoteWidgetFactory(RemoteManagerWidget.of(context).parsers ?? []);
     return RemoteWidgetData(
       child: Builder(builder: (context) => factory.fromJson(context, definition, data)),
       data: associatedData,
@@ -168,8 +220,10 @@ class RemoteWidget extends StatelessWidget {
   }
 }
 
+typedef RemoteWidgetInteraction = Function(String key, dynamic value, {dynamic associatedData});
+
 class RemoteManagerWidget extends InheritedWidget {
-  final Function(String key, dynamic value, {dynamic associatedData}) onChanges;
+  final RemoteWidgetInteraction onChanges;
   final List<RemoteFactory> parsers;
 
   RemoteManagerWidget({Key key, this.onChanges, Widget child, this.parsers = const []}) : super(key: key, child: child);

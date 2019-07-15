@@ -5,10 +5,12 @@ import 'package:remote_ui/src/parsers/default_parser.dart';
 class RaisedButtonParser extends WidgetParser {
   Widget parse(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
     return RaisedButton(
-      onPressed: () {
-        RemoteManagerWidget.of(context)
-            .onChanges(factory.getData(definition, data, 'id'), factory.getData(definition, data, 'value'), associatedData: RemoteWidgetData.of(context).data);
-      },
+      onPressed: definition['enabled'] ?? true
+          ? () {
+              RemoteManagerWidget.of(context).onChanges(factory.getData(definition, data, 'id'), factory.getData(definition, data, 'value'),
+                  associatedData: RemoteWidgetData.of(context).data);
+            }
+          : null,
       color: definition.containsKey('color') ? Color(factory.getData(definition, data, 'color')) : null,
       disabledColor: definition.containsKey('disabledColor') ? Color(factory.getData(definition, data, 'disabledColor')) : null,
       focusColor: definition.containsKey('focusColor') ? Color(factory.getData(definition, data, 'focusColor')) : null,

@@ -33,6 +33,7 @@ class ColorPickerInline extends HookWidget with ColorToHex {
     final valueState = useState(value);
     useEffect(() {
       valueState.value = value;
+      return null;
     }, [value]);
     return picker.ColorPicker(
       pickerColor: valueState.value,

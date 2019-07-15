@@ -1,4 +1,8 @@
-## [0.0.2] - 16/09/2019
+## [0.0.3] - 10/07/2019
+
+* Compatibility with last flutter stable
+
+## [0.0.2] - 16/06/2019
 
 * add color helper.
 

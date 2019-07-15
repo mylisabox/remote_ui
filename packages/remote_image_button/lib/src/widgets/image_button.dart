@@ -30,6 +30,7 @@ class ImageButton extends HookWidget {
 
     useEffect(() {
       valueState.value = value;
+      return null;
     }, [value]);
 
     final url = prefixWithBaseUrl(values == null ? valueState.value : values[valueState.value]);

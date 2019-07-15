@@ -38,6 +38,7 @@ class ColorPicker extends HookWidget with ColorToHex {
 
     useEffect(() {
       valueState.value = value;
+      return null;
     }, [value]);
 
     return Center(
