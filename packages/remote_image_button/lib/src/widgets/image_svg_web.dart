@@ -1,5 +1,5 @@
 import 'dart:ui' as ui;
-import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -27,17 +27,18 @@ class ImageSvgWeb extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final element = useMemoized(() => ImageElement(src: url, height: height.toInt(), width: width.toInt()));
+    final id = useMemoized(() => UniqueKey().toString());
 
     useEffect(() {
-      ui.platformViewRegistry.registerViewFactory('img-svg', (int viewId) {
+      ui.platformViewRegistry.registerViewFactory('img-svg-$id', (int viewId) {
+        final element = ImageElement(src: url, height: height.toInt(), width: width.toInt());
         return element;
       });
-      return null;
-    }, [element]);
+      return () {};
+    }, const []);
 
     return HtmlElementView(
-      viewType: 'img-svg',
+      viewType: 'img-svg-$id',
     );
   }
 }
