@@ -183,7 +183,7 @@ class RemoteWidgetFactory with ColorHexParser {
       case 'dropdown_button':
         return _dropdownButtonParser.parse(context, definition, data, this);
     }
-    debugPrint(definition['type'] + ' is not currently supported by remote_ui');
+    debugPrint((definition['type'] ?? definition.toString()) + ' is not currently supported by remote_ui');
     return Placeholder();
   }
 }
