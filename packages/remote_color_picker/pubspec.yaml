@@ -1,6 +1,6 @@
 name: remote_color_picker
 description: Color picker addon for remote ui package
-version: 0.0.1
+version: 0.0.2
 author: jaumard <jimmy.aumard@gmail.com>
 homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_color_picker
 
@@ -12,7 +12,7 @@ dependencies:
     #git:
     #  url: https://github.com/mchome/flutter_colorpicker
   flutter_hooks: ^0.6.0
-  remote_ui: ^0.0.4
+  remote_ui: ^0.0.5
     #path: '../remote_ui'
   flutter:
     sdk: flutter
