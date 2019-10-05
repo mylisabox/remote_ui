@@ -1,6 +1,6 @@
 name: remote_ip_camera
 description: Camera IP addon for remote ui package
-version: 1.0.0
+version: 1.0.1
 author: jaumard <jimmy.aumard@gmail.com>
 homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_ip_camera
 
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter_mjpeg: ^1.2.2
   flutter_hooks: ^0.6.0
-  remote_ui: ^0.0.4
+  remote_ui: ^0.0.5
     ##path: '../remote_ui'
   flutter:
     sdk: flutter
