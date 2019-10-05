@@ -49,9 +49,12 @@ class RemoteWidgetFactory with ColorHexParser {
         _flatButtonParser = FlatButtonParser();
 
   dynamic getData(Map<String, dynamic> definition, Map<String, dynamic> data, String key, {defaultValue}) {
-    final definitionData = definition[key];
+    var definitionData = definition[key];
     if (definitionData is String && definitionData.startsWith('\$') && definitionData.endsWith('\$')) {
       return _getSubData(data, definitionData, defaultValue: defaultValue);
+    }
+    if (defaultValue is num && definitionData is String) {
+      definitionData = num.tryParse(definitionData);
     }
     return definitionData ?? defaultValue;
   }
@@ -67,8 +70,11 @@ class RemoteWidgetFactory with ColorHexParser {
       final parts = parsedKey.split('.');
       return _getSubData(data[parts.first], parts.sublist(1).join('.'));
     }
-
-    return data[parsedKey] ?? defaultValue;
+    var value = data[parsedKey];
+    if (defaultValue is num && value is String) {
+      value = num.tryParse(value);
+    }
+    return value ?? defaultValue;
   }
 
   EdgeInsets getEdgeInsets(definition) {

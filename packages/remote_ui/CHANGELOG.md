@@ -1,3 +1,7 @@
+## [0.0.6] - 05/10/2019
+
+* better parsing of string number values
+
 ## [0.0.4] - 01/08/2019
 
 * Fix same parsing issue and colors
