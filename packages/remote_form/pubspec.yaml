@@ -1,6 +1,6 @@
 name: remote_form
 description: Manage form and UI from backend side as JSON
-version: 0.0.1
+version: 0.0.2
 author: jaumard <jimmy.aumard@gmail.com>
 homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_form
 
@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   flutter_hooks: ^0.6.0
-  remote_ui: ^0.0.4
+  remote_ui: ^0.0.5
     #path: '../remote_ui'
   flutter:
     sdk: flutter

@@ -49,10 +49,31 @@ class RemoteFormFactory implements RemoteFactory {
   }
 }
 
+class RemoteFormValidatorProvider extends StatefulWidget {
+  final Widget child;
+
+  const RemoteFormValidatorProvider({Key key, this.child}) : super(key: key);
+
+  @override
+  RemoteFormValidatorProviderState createState() => RemoteFormValidatorProviderState();
+}
+
+class RemoteFormValidatorProviderState extends State<RemoteFormValidatorProvider> {
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
+  }
+
+  bool isFormValid() {
+    return RemoteFormValidator.of(context).isFormValid();
+  }
+}
+
 class RemoteFormValidator extends InheritedWidget {
   final Map<String, _FormValidator> validators;
   final Map<String, dynamic> formData;
-  RemoteFormValidator({Widget child, this.formData, this.validators = const {}}) : super(child: child);
+
+  RemoteFormValidator({Widget child, Key key, this.formData, this.validators = const {}}) : super(key: key, child: child);
 
   bool isFormValid() {
     for (int i = 0; i < validators.entries.length; i++) {
@@ -78,13 +99,22 @@ class RemoteFormValidator extends InheritedWidget {
 class RemoteForm extends HookWidget {
   final Map<String, dynamic> definition;
   final Map<String, dynamic> data;
+  final Key validatorKey;
   final dynamic associatedData;
   final List<RemoteFactory> parsers;
   final RemoteWidgetInteraction onChanges;
-  final Function(Map<String, dynamic> formData, {dynamic associatedData}) onSubmit;
+  final void Function(Map<String, dynamic> formData, {dynamic associatedData}) onSubmit;
 
-  const RemoteForm({Key key, @required this.definition, this.data, this.associatedData, @required this.onSubmit, this.parsers = const [], this.onChanges})
-      : super(key: key);
+  const RemoteForm({
+    Key key,
+    this.validatorKey,
+    @required this.definition,
+    this.data,
+    this.associatedData,
+    @required this.onSubmit,
+    this.parsers = const [],
+    this.onChanges,
+  }) : super(key: key);
 
   Map<String, _FormValidator> _findValidators(Map<String, dynamic> definition) {
     if (definition == null) {
@@ -113,23 +143,28 @@ class RemoteForm extends HookWidget {
     return RemoteFormValidator(
       formData: formData.value,
       validators: formValidators,
-      child: RemoteManagerWidget(
-        child: RemoteWidget(
-          definition: definition,
-          data: formData.value,
-          associatedData: associatedData,
-        ),
-        parsers: [RemoteFormFactory(), ...parsers],
-        onChanges: (key, value, {associatedData}) {
-          formData.value = Map.from(formData.value)..[key] = value;
+      child: RemoteFormValidatorProvider(
+        key: validatorKey,
+        child: Builder(
+          builder: (_) => RemoteManagerWidget(
+            child: RemoteWidget(
+              definition: definition,
+              data: formData.value,
+              associatedData: associatedData,
+            ),
+            parsers: [RemoteFormFactory(), ...parsers],
+            onChanges: (key, value, {associatedData}) {
+              formData.value = Map.from(formData.value)..[key] = value;
 
-          if (onChanges != null) {
-            onChanges(key, value, associatedData: associatedData);
-          }
-          if (key == 'submit') {
-            onSubmit(formData.value, associatedData: associatedData);
-          }
-        },
+              if (onChanges != null) {
+                onChanges(key, value, associatedData: associatedData);
+              }
+              if (key == 'submit') {
+                onSubmit(formData.value, associatedData: associatedData);
+              }
+            },
+          ),
+        ),
       ),
     );
   }
