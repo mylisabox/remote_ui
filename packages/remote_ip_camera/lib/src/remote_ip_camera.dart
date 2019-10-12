@@ -4,8 +4,7 @@ import 'package:remote_ui/remote_ui.dart';
 
 class RemoteIpCameraFactory implements RemoteFactory {
   final IpCameraParser _cameraParser;
-
-  RemoteIpCameraFactory() : _cameraParser = IpCameraParser();
+  RemoteIpCameraFactory({String Function() baseUrlProvider}) : _cameraParser = IpCameraParser(baseUrlProvider);
 
   Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
     switch (definition['type']) {

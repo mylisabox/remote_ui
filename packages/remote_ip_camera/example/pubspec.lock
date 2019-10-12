@@ -47,7 +47,7 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0"
+    version: "0.6.1"
   flutter_mjpeg:
     dependency: transitive
     description:
@@ -115,14 +115,14 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.1"
+    version: "1.1.1"
   remote_ui:
     dependency: transitive
     description:
       name: remote_ui
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.5"
+    version: "0.0.6"
   sky_engine:
     dependency: transitive
     description: flutter

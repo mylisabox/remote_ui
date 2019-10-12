@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_mjpeg/flutter_mjpeg.dart';
 
 class IpCamera extends HookWidget {
+  final String Function() baseUrlProvider;
   final String stream;
   final String preview;
   final String id;
@@ -11,8 +12,9 @@ class IpCamera extends HookWidget {
   final BoxFit fit;
   final Color color;
 
-  IpCamera({
+  const IpCamera({
     this.width,
+    this.baseUrlProvider,
     this.color,
     this.fit,
     this.height,
@@ -25,9 +27,10 @@ class IpCamera extends HookWidget {
   Widget build(BuildContext context) {
     final isPlaying = useState(false);
     final streamState = useState(stream);
+    final urlProvider = baseUrlProvider ?? () => '';
 
     useEffect(() {
-      streamState.value = stream;
+      streamState.value = urlProvider() + stream;
       return null;
     }, [stream]);
 
@@ -48,7 +51,7 @@ class IpCamera extends HookWidget {
             if (!isPlaying.value)
               IconButton(
                 onPressed: () {
-                  streamState.value = '$stream?timestamp=${DateTime.now().millisecondsSinceEpoch}';
+                  streamState.value = '${streamState.value}?timestamp=${DateTime.now().millisecondsSinceEpoch}';
                 },
                 color: color,
                 icon: Icon(Icons.refresh),
@@ -57,7 +60,7 @@ class IpCamera extends HookWidget {
         ),
         Expanded(
           child: Mjpeg(
-            stream: stream,
+            stream: streamState.value,
             fit: fit,
             isLive: isPlaying.value,
             width: width,
@@ -74,7 +77,8 @@ class IpCamera extends HookWidget {
                     children: [
                       Center(
                         child: Mjpeg(
-                          stream: stream,
+                          stream: streamState.value,
+                          isLive: true,
                           fit: fit,
                         ),
                       ),
