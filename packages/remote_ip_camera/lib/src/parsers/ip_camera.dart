@@ -7,7 +7,8 @@ class IpCameraParser extends WidgetParser with ColorHexParser {
 
   IpCameraParser(this.baseUrlProvider);
 
-  Widget parse(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
+  Widget parse(BuildContext context, Map<String, dynamic> definition,
+      Map<String, dynamic> data, RemoteWidgetFactory factory) {
     final color = factory.getData(definition, data, 'color');
     return IpCamera(
       baseUrlProvider: baseUrlProvider,
@@ -17,7 +18,9 @@ class IpCameraParser extends WidgetParser with ColorHexParser {
       preview: factory.getData(definition, data, 'preview'),
       width: factory.getData(definition, data, 'width')?.toDouble(),
       height: factory.getData(definition, data, 'height')?.toDouble(),
-      fit: definition.containsKey('fit') ? BoxFit.values[factory.getData(definition, data, 'fit')] : BoxFit.cover,
+      fit: definition.containsKey('fit')
+          ? BoxFit.values[factory.getData(definition, data, 'fit')]
+          : BoxFit.cover,
     );
   }
 }

@@ -1,5 +1,5 @@
 name: remote_ip_camera
-description: Camera IP addon for remote ui package
+description: Camera IP addon for remote ui package, allow you to add a remote widget that show mjpeg stream from URL
 version: 1.1.1
 author: jaumard <jimmy.aumard@gmail.com>
 homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_ip_camera

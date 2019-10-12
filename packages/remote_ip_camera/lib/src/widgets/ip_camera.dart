@@ -51,7 +51,8 @@ class IpCamera extends HookWidget {
             if (!isPlaying.value)
               IconButton(
                 onPressed: () {
-                  streamState.value = '${streamState.value}?timestamp=${DateTime.now().millisecondsSinceEpoch}';
+                  streamState.value =
+                      '${streamState.value}?timestamp=${DateTime.now().millisecondsSinceEpoch}';
                 },
                 color: color,
                 icon: Icon(Icons.refresh),
@@ -72,7 +73,8 @@ class IpCamera extends HookWidget {
           children: <Widget>[
             IconButton(
               onPressed: () {
-                Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(builder: (BuildContext context) {
+                Navigator.of(context, rootNavigator: true)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
                   return Stack(
                     children: [
                       Center(
