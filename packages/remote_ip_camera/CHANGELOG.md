@@ -1,3 +1,7 @@
+## [1.1.3] - 26/03/2020.
+
+* update mjpeg dep
+
 ## [1.1.2] - 02/11/2019.
 
 * stop stream when widget is not on screen 
