@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:remote_ui/remote_ui.dart';
 
-class RemoteDownButton extends HookWidget {
+class RemoteDropdownButton extends HookWidget {
   final String id;
   final bool isDense;
   final bool isExpanded;
@@ -15,15 +15,17 @@ class RemoteDownButton extends HookWidget {
   final Color iconDisabledColor;
   final Color iconEnabledColor;
   final items;
+  final values;
   final value;
 
-  RemoteDownButton(
+  RemoteDropdownButton(
       {Key key,
       this.id,
       this.elevation,
       this.isDense,
       this.items,
       this.value,
+      this.values,
       this.iconSize,
       this.isExpanded,
       this.underline,
@@ -52,7 +54,7 @@ class RemoteDownButton extends HookWidget {
                   child: Text(item.toString()),
                   value: item,
                 ))
-            .toList(growable: false),
+            .toList(growable: false).cast<DropdownMenuItem>(),
       );
     } else if (items is Map) {
       (items as Map).forEach((key, value) => dropItems.add(DropdownMenuItem(

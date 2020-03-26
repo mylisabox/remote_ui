@@ -5,12 +5,13 @@ import 'package:remote_ui/src/widgets/remote_dropdown_button.dart';
 
 class DropdownButtonParser extends WidgetParser with ColorHexParser {
   Widget parse(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
-    return RemoteDownButton(
+    return RemoteDropdownButton(
       id: definition['id'],
       elevation: definition['elevation'] ?? 8,
       isDense: definition['isDense'] ?? false,
-      items: definition['items'],
-      value: definition['value'],
+      items: factory.getData(definition, data, 'items', defaultValue: []).toList(growable: false),
+      value: factory.getData(definition, data, 'value'),
+      values: factory.getData(definition, data, 'values', defaultValue: []).toList(growable: false),
       iconSize: definition['iconSize'] ?? 24.0,
       isExpanded: definition['isExpanded'] ?? false,
       underline: factory.fromJson(context, definition['underline'], data),

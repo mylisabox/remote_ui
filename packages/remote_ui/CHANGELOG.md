@@ -1,3 +1,7 @@
+## [0.0.7] - 26/03/2020
+
+* fix dropdown button
+
 ## [0.0.6] - 05/10/2019
 
 * better parsing of string number values
