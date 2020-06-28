@@ -79,9 +79,9 @@ packages:
   flutter_mjpeg:
     dependency: "direct main"
     description:
-      name: flutter_mjpeg
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../../../flutter_mjpeg"
+      relative: true
+    source: path
     version: "1.2.6"
   flutter_test:
     dependency: "direct dev"

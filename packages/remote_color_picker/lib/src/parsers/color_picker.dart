@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/hsv_picker.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart' hide ColorPicker;
 import 'package:remote_color_picker/src/widgets/color_picker.dart';
 import 'package:remote_ui/remote_ui.dart';
 

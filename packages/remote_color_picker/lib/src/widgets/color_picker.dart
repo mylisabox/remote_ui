@@ -71,7 +71,7 @@ class ColorPicker extends HookWidget with ColorToHex {
               onColorChanged: (color) {
                 valueState.value = color;
               },
-              enableLabel: enableLabel,
+              showLabel: enableLabel,
               enableAlpha: enableAlpha,
               paletteType: paletteType,
               displayThumbColor: displayThumbColor,

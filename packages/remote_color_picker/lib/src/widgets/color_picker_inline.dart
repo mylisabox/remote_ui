@@ -45,7 +45,7 @@ class ColorPickerInline extends HookWidget with ColorToHex {
       colorPickerWidth: colorPickerWidth,
       displayThumbColor: displayThumbColor,
       enableAlpha: enableAlpha,
-      enableLabel: enableLabel,
+      showLabel: enableLabel,
       paletteType: paletteType,
       pickerAreaHeightPercent: pickerAreaHeightPercent,
     );

@@ -1,3 +1,7 @@
+## [0.0.8] - 17/06/2020
+
+* update deps
+
 ## [0.0.7] - 26/03/2020
 
 * fix dropdown button
