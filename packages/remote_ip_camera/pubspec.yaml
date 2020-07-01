@@ -7,10 +7,10 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
-  flutter_mjpeg: #^1.2.6
-    path: '../../../flutter_mjpeg'
-  flutter_hooks: ^0.9.0
-  remote_ui: ^0.0.7
+  flutter_mjpeg: ^1.2.8
+    #path: '../../../flutter_mjpeg'
+  flutter_hooks: ^0.10.0
+  remote_ui: ^0.0.8
     #path: '../remote_ui'
   flutter:
     sdk: flutter

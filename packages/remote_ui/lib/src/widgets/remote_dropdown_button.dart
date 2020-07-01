@@ -41,13 +41,12 @@ class RemoteDropdownButton extends HookWidget {
   Widget build(BuildContext context) {
     final selectedValue = useState<dynamic>(value);
 
-    useEffect(() {
-      selectedValue.value = value;
-      return null;
-    }, [value]);
-
     final dropItems = <DropdownMenuItem>[];
+    var currentValue;
     if (items is List) {
+      if (items.contains(value)) {
+        currentValue = value;
+      }
       dropItems.addAll(
         items
             .map((item) => DropdownMenuItem(
@@ -57,11 +56,19 @@ class RemoteDropdownButton extends HookWidget {
             .toList(growable: false).cast<DropdownMenuItem>(),
       );
     } else if (items is Map) {
+      if ((items as Map).values.contains(value)) {
+        currentValue = value;
+      }
       (items as Map).forEach((key, value) => dropItems.add(DropdownMenuItem(
             child: Text(value.toString()),
             value: key,
           )));
     }
+
+    useEffect(() {
+      selectedValue.value = currentValue;
+      return null;
+    }, [value]);
 
     return DropdownButton(
       onChanged: (selected) {
