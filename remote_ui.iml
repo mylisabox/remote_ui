@@ -14,14 +14,12 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_color_picker/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_form/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_form/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_form/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_form/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_form/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_form/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_form/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_grid_container/build" />
@@ -35,21 +33,18 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_image_button/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ip_camera/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ip_camera/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ip_camera/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ip_camera/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ip_camera/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ip_camera/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ip_camera/example/ios/Flutter/App.framework/flutter_assets/packages" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/remote_ui/example/ios/Flutter/App.framework/flutter_assets/packages" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
