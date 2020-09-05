@@ -28,6 +28,7 @@ class TextFieldParser extends WidgetParser with ColorHexParser {
       maxLength: definition['maxLength'],
       maxLines: definition['maxLines'] ?? 1,
       minLines: definition['minLines'],
+      text: definition['text'] ?? '',
       decoration: factory.getInputDecoration(context, definition['decoration'], data),
       keyboardAppearance: definition.containsKey('keyboardAppearance') ? Brightness.values[definition['keyboardAppearance']] : null,
     );
