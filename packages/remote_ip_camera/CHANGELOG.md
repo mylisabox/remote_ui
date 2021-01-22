@@ -2,6 +2,10 @@
 
 * update deps.
 
+## [1.1.4] - 10/08/2020.
+
+* update mjpeg dep
+
 ## [1.1.3] - 26/03/2020.
 
 * update mjpeg dep
