@@ -205,7 +205,7 @@ class RemoteWidgetData extends InheritedWidget {
   }
 
   static RemoteWidgetData of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(RemoteWidgetData) as RemoteWidgetData;
+    return context.dependOnInheritedWidgetOfExactType<RemoteWidgetData>();
   }
 }
 
@@ -240,6 +240,6 @@ class RemoteManagerWidget extends InheritedWidget {
   }
 
   static RemoteManagerWidget of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(RemoteManagerWidget) as RemoteManagerWidget;
+    return context.dependOnInheritedWidgetOfExactType<RemoteManagerWidget>();
   }
 }

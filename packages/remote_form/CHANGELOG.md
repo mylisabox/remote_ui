@@ -1,3 +1,11 @@
+## [0.0.4] - 22/01/2021.
+
+* update deps.
+
+## [0.0.3]
+
+* update deps.
+
 ## [0.0.2] - 05/10/2019.
 
 * add validator provider to check form from outside.

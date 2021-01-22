@@ -80,13 +80,13 @@ class ColorPicker extends HookWidget with ColorToHex {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
               onPressed: () {
                 RemoteManagerWidget.of(mainContext).onChanges(id, isOutputHexString ? toHex(valueState.value, includeAlphaInHexString) : valueState.value.value,

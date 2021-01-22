@@ -92,7 +92,7 @@ class RemoteFormValidator extends InheritedWidget {
   }
 
   static RemoteFormValidator of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(RemoteFormValidator) as RemoteFormValidator;
+    return context.dependOnInheritedWidgetOfExactType<RemoteFormValidator>();
   }
 }
 

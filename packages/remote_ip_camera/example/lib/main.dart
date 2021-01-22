@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
