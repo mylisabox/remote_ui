@@ -20,7 +20,7 @@ import 'package:remote_ui/src/parsers/text.dart';
 import 'package:remote_ui/src/parsers/text_field.dart';
 
 abstract class RemoteFactory {
-  Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory);
+  Widget? fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory);
 }
 
 class RemoteWidgetFactory with ColorHexParser {
@@ -48,7 +48,7 @@ class RemoteWidgetFactory with ColorHexParser {
         _sliderParser = SliderParser(),
         _flatButtonParser = FlatButtonParser();
 
-  dynamic getData(Map<String, dynamic> definition, Map<String, dynamic> data, String key, {defaultValue}) {
+  dynamic? getData(Map<String, dynamic> definition, Map<String, dynamic> data, String key, {defaultValue}) {
     var definitionData = definition[key];
     if (definitionData is String && definitionData.startsWith('\$') && definitionData.endsWith('\$')) {
       return _getSubData(data, definitionData, defaultValue: defaultValue);
@@ -60,7 +60,7 @@ class RemoteWidgetFactory with ColorHexParser {
   }
 
   dynamic _getSubData(Map<String, dynamic> data, String dataKey, {defaultValue}) {
-    if (data == null || data.isEmpty) {
+    if (data.isEmpty) {
       return defaultValue;
     }
 
@@ -77,10 +77,11 @@ class RemoteWidgetFactory with ColorHexParser {
     return value ?? defaultValue;
   }
 
-  EdgeInsets getEdgeInsets(definition) {
+  EdgeInsets? getEdgeInsets(definition) {
     if (definition == null) {
       return null;
     }
+
     if (definition is Map) {
       return EdgeInsets.fromLTRB(
         definition['left']?.toDouble() ?? .0,
@@ -93,7 +94,7 @@ class RemoteWidgetFactory with ColorHexParser {
   }
 
   InputDecoration getInputDecoration(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data) {
-    if (definition == null) {
+    if (definition.isEmpty) {
       return InputDecoration();
     }
 
@@ -108,6 +109,7 @@ class RemoteWidgetFactory with ColorHexParser {
       errorMaxLines: definition['errorMaxLines'],
       filled: definition['filled'] ?? false,
       fillColor: definition.containsKey('fillColor') ? Color(parseHex(definition['fillColor'])) : null,
+      // ignore: deprecated_member_use
       hasFloatingPlaceholder: definition['hasFloatingPlaceholder'] ?? true,
       helperText: definition['helperText'],
       isDense: definition['isDense'] ?? false,
@@ -123,8 +125,8 @@ class RemoteWidgetFactory with ColorHexParser {
     );
   }
 
-  Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data) {
-    if (definition == null) {
+  Widget? fromJson(BuildContext context, Map<String, dynamic>? definition, Map<String, dynamic> data) {
+    if (definition == null || definition.isEmpty) {
       return null;
     }
 
@@ -133,7 +135,7 @@ class RemoteWidgetFactory with ColorHexParser {
 
       return Expanded(
         flex: flex,
-        child: fromJson(context, Map.from(definition)..remove('flex'), data),
+        child: fromJson(context, Map.from(definition)..remove('flex'), data)!,
       );
     }
 
@@ -141,7 +143,7 @@ class RemoteWidgetFactory with ColorHexParser {
       final padding = definition['padding'];
 
       return Padding(
-        padding: getEdgeInsets(padding),
+        padding: getEdgeInsets(padding)!,
         child: fromJson(context, Map.from(definition)..remove('padding'), data),
       );
     }
@@ -197,14 +199,14 @@ class RemoteWidgetFactory with ColorHexParser {
 class RemoteWidgetData extends InheritedWidget {
   final data;
 
-  RemoteWidgetData({this.data, Widget child}) : super(child: child);
+  RemoteWidgetData({this.data, required Widget child}) : super(child: child);
 
   @override
   bool updateShouldNotify(RemoteWidgetData oldWidget) {
     return oldWidget.data != data;
   }
 
-  static RemoteWidgetData of(BuildContext context) {
+  static RemoteWidgetData? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<RemoteWidgetData>();
   }
 }
@@ -214,13 +216,13 @@ class RemoteWidget extends StatelessWidget {
   final Map<String, dynamic> data;
   final Map<String, dynamic> definition;
 
-  const RemoteWidget({Key key, @required this.definition, this.associatedData, this.data}) : super(key: key);
+  const RemoteWidget({Key? key, required this.definition, this.associatedData, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final factory = RemoteWidgetFactory(RemoteManagerWidget.of(context).parsers ?? []);
+    final factory = RemoteWidgetFactory(RemoteManagerWidget.of(context)?.parsers ?? []);
     return RemoteWidgetData(
-      child: Builder(builder: (context) => factory.fromJson(context, definition, data)),
+      child: Builder(builder: (context) => factory.fromJson(context, definition, data) ?? SizedBox()),
       data: associatedData,
     );
   }
@@ -232,14 +234,14 @@ class RemoteManagerWidget extends InheritedWidget {
   final RemoteWidgetInteraction onChanges;
   final List<RemoteFactory> parsers;
 
-  RemoteManagerWidget({Key key, this.onChanges, Widget child, this.parsers = const []}) : super(key: key, child: child);
+  RemoteManagerWidget({Key? key, required this.onChanges, required Widget child, this.parsers = const []}) : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(RemoteManagerWidget oldWidget) {
     return oldWidget.onChanges != onChanges;
   }
 
-  static RemoteManagerWidget of(BuildContext context) {
+  static RemoteManagerWidget? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<RemoteManagerWidget>();
   }
 }

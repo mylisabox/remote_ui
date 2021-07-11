@@ -8,20 +8,20 @@ class ImageButton extends HookWidget {
   final value;
   final values;
   final String id;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
   final EdgeInsets padding;
 
   ImageButton({
+    required this.fit,
     this.width,
-    this.fit,
     this.height,
-    this.baseUrlProvider,
-    this.value,
-    this.values,
-    this.id,
-    this.padding,
+    required this.baseUrlProvider,
+    required this.value,
+    required this.values,
+    required this.id,
+    required this.padding,
   });
 
   @override
@@ -55,7 +55,7 @@ class ImageButton extends HookWidget {
               valueState.value = value + 1;
             }
           }
-          RemoteManagerWidget.of(context).onChanges(id, valueState.value, associatedData: RemoteWidgetData.of(context).data);
+          RemoteManagerWidget.of(context)?.onChanges(id, valueState.value, associatedData: RemoteWidgetData.of(context)?.data);
         },
         child: Padding(
           child: url.endsWith('.svg')
@@ -78,9 +78,6 @@ class ImageButton extends HookWidget {
   }
 
   String prefixWithBaseUrl(String value) {
-    if (value == null) {
-      return null;
-    }
     if (value.startsWith('http')) {
       return value;
     }

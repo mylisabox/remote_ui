@@ -11,8 +11,8 @@ class ColorPicker extends HookWidget with ColorToHex {
   final bool enableAlpha;
   final bool enableLabel;
   final double pickerAreaHeightPercent;
-  final double buttonWidth;
-  final double buttonHeight;
+  final double? buttonWidth;
+  final double? buttonHeight;
   final picker.PaletteType paletteType;
   final bool isOutputHexString;
   final bool includeAlphaInHexString;
@@ -22,14 +22,14 @@ class ColorPicker extends HookWidget with ColorToHex {
     this.includeAlphaInHexString = true,
     this.buttonWidth,
     this.buttonHeight,
-    this.value,
-    this.id,
-    this.paletteType,
-    this.displayThumbColor,
-    this.enableAlpha,
-    this.enableLabel,
-    this.pickerAreaHeightPercent,
-    this.colorPickerWidth,
+    required this.value,
+    required this.id,
+    required this.paletteType,
+    required this.displayThumbColor,
+    required this.enableAlpha,
+    required this.enableLabel,
+    required this.pickerAreaHeightPercent,
+    required this.colorPickerWidth,
   });
 
   @override
@@ -89,8 +89,8 @@ class ColorPicker extends HookWidget with ColorToHex {
             TextButton(
               child: Text(MaterialLocalizations.of(context).okButtonLabel),
               onPressed: () {
-                RemoteManagerWidget.of(mainContext).onChanges(id, isOutputHexString ? toHex(valueState.value, includeAlphaInHexString) : valueState.value.value,
-                    associatedData: RemoteWidgetData.of(mainContext).data);
+                RemoteManagerWidget.of(mainContext)?.onChanges(id, isOutputHexString ? toHex(valueState.value, includeAlphaInHexString) : valueState.value.value,
+                    associatedData: RemoteWidgetData.of(mainContext)?.data);
                 Navigator.of(context).pop();
               },
             ),

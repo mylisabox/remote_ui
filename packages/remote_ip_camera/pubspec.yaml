@@ -1,16 +1,17 @@
 name: remote_ip_camera
 description: Camera IP addon for remote ui package, allow you to add a remote widget that show mjpeg stream from URL
-version: 1.1.5
+version: 2.0.0
 homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_ip_camera
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
+  flutter_sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
-  flutter_mjpeg: ">=1.3.0 <2.0.0"
+  flutter_mjpeg: ">=2.0.0 <3.0.0"
     #path: '../../../flutter_mjpeg'
-  flutter_hooks: ">=0.10.0 <1.0.0"
-  remote_ui: ">=0.0.10 <0.1.0"
+  flutter_hooks: ">=0.16.0 <1.0.0"
+  remote_ui: ">=0.1.0 <1.0.0"
     #path: '../remote_ui'
   flutter:
     sdk: flutter

@@ -7,8 +7,8 @@ class FlatButtonParser extends WidgetParser {
     return FlatButton(
       onPressed: definition['enabled'] ?? true
           ? () {
-              RemoteManagerWidget.of(context).onChanges(factory.getData(definition, data, 'id'), factory.getData(definition, data, 'value'),
-                  associatedData: RemoteWidgetData.of(context).data);
+              RemoteManagerWidget.of(context)?.onChanges(factory.getData(definition, data, 'id'), factory.getData(definition, data, 'value'),
+                  associatedData: RemoteWidgetData.of(context)?.data);
             }
           : null,
       color: definition.containsKey('color') ? Color(factory.getData(definition, data, 'color')) : null,
@@ -21,7 +21,7 @@ class FlatButtonParser extends WidgetParser {
       textColor: definition.containsKey('textColor') ? Color(factory.getData(definition, data, 'textColor')) : null,
       colorBrightness: definition.containsKey('colorBrightness') ? Brightness.values[definition['colorBrightness']] : null,
       padding: factory.getEdgeInsets(definition['padding']),
-      child: factory.fromJson(context, definition['child'], data) ??
+      child: definition.containsKey('child') ? factory.fromJson(context, definition['child'], data)! :
           Text(
             factory.getData(definition, data, 'text', defaultValue: '').toString(),
             textAlign: TextAlign.center,

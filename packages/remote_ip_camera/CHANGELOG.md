@@ -1,3 +1,7 @@
+## [2.0.0] - 11/07/2021.
+
+* migrate to null safety
+
 ## [1.1.5] - 22/01/2021.
 
 * update deps.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:remote_ui/remote_ui.dart';
 import 'package:remote_ui/src/parsers/default_parser.dart';
 import 'package:remote_ui/src/widgets/remote_text_field.dart';
@@ -18,6 +19,7 @@ class TextFieldParser extends WidgetParser with ColorHexParser {
       enabled: definition['enabled'] ?? true,
       enableInteractiveSelection: definition['enableInteractiveSelection'] ?? true,
       maxLengthEnforced: definition['maxLengthEnforced'] ?? true,
+      maxLengthEnforcement: definition.containsKey('maxLengthEnforcement') ? MaxLengthEnforcement.values[definition['maxLengthEnforcement']] : null,
       textCapitalization: definition.containsKey('textCapitalization') ? TextCapitalization.values[definition['textCapitalization']] : TextCapitalization.none,
       keyboardType: definition.containsKey('keyboardType') ? TextInputType.values[definition['keyboardType']] : null,
       textInputAction: definition.containsKey('textInputAction') ? TextInputAction.values[definition['textInputAction']] : TextInputAction.next,

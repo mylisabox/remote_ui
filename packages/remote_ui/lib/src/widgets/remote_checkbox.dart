@@ -6,14 +6,14 @@ class RemoteCheckbox extends HookWidget {
   final String id;
   final bool value;
   final bool tristate;
-  final Color checkColor;
-  final Color activeColor;
+  final Color? checkColor;
+  final Color? activeColor;
 
   const RemoteCheckbox({
-    Key key,
-    this.id,
-    this.value,
-    this.tristate,
+    Key? key,
+    required this.id,
+    required this.value,
+    required this.tristate,
     this.checkColor,
     this.activeColor,
   }) : super(key: key);
@@ -28,8 +28,8 @@ class RemoteCheckbox extends HookWidget {
 
     return Checkbox(
       onChanged: (selected) {
-        checked.value = selected;
-        RemoteManagerWidget.of(context).onChanges(id, selected, associatedData: RemoteWidgetData.of(context).data);
+        checked.value = selected!;
+        RemoteManagerWidget.of(context)?.onChanges(id, selected, associatedData: RemoteWidgetData.of(context)?.data);
       },
       value: value,
       activeColor: activeColor,

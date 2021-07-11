@@ -12,10 +12,8 @@ class IpCameraParser extends WidgetParser with ColorHexParser {
     final color = factory.getData(definition, data, 'color');
     return IpCamera(
       baseUrlProvider: baseUrlProvider,
-      id: factory.getData(definition, data, 'id'),
       stream: factory.getData(definition, data, 'stream'),
       color: definition.containsKey('color') ? Color(parseHex(color)) : null,
-      preview: factory.getData(definition, data, 'preview'),
       width: factory.getData(definition, data, 'width')?.toDouble(),
       height: factory.getData(definition, data, 'height')?.toDouble(),
       fit: definition.containsKey('fit')

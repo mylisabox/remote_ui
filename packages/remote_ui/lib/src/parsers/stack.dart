@@ -7,8 +7,10 @@ class StackParser extends WidgetParser {
     return Stack(
       children: List.from(definition['children'].map((item) => factory.fromJson(context, item, data))),
       textDirection: definition.containsKey('textDirection') ? TextDirection.values[definition['textDirection']] : null,
-      overflow: definition.containsKey('overflow') ? Overflow.values[definition['overflow']] : null,
-      fit: definition.containsKey('textBaseline') ? StackFit.values[definition['fit']] : null,
+      // ignore: deprecated_member_use
+      overflow: definition.containsKey('overflow') ? Overflow.values[definition['overflow']] : Overflow.clip,
+      clipBehavior: definition.containsKey('clipBehavior') ? Clip.values[definition['clipBehavior']] : Clip.hardEdge,
+      fit: definition.containsKey('textBaseline') ? StackFit.values[definition['fit']] : StackFit.loose,
     );
   }
 }

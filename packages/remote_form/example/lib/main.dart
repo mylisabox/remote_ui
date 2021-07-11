@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onSubmit: (values, {associatedData}) {
                   debugPrint('form submitted $values');
                 },
+                associatedData: {},
                 onChanges: (key, value, {associatedData}) => debugPrint('$key change to $value'),
                 definition: {
                   'type': 'column',
@@ -107,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     }
                   ],
                 },
+                data: {},
               ),
             ),
           ],

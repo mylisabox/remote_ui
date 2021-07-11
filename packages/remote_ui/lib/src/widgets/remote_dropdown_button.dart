@@ -8,26 +8,26 @@ class RemoteDropdownButton extends HookWidget {
   final bool isExpanded;
   final int elevation;
   final double iconSize;
-  final Widget underline;
-  final Widget disabledHint;
-  final Widget icon;
-  final Widget hint;
-  final Color iconDisabledColor;
-  final Color iconEnabledColor;
+  final Widget? underline;
+  final Widget? disabledHint;
+  final Widget? icon;
+  final Widget? hint;
+  final Color? iconDisabledColor;
+  final Color? iconEnabledColor;
   final items;
   final values;
   final value;
 
   RemoteDropdownButton(
-      {Key key,
-      this.id,
-      this.elevation,
-      this.isDense,
+      {Key? key,
+      required this.id,
+      required this.elevation,
+      required this.isDense,
       this.items,
       this.value,
       this.values,
-      this.iconSize,
-      this.isExpanded,
+      required this.iconSize,
+      required this.isExpanded,
       this.underline,
       this.disabledHint,
       this.icon,
@@ -70,10 +70,10 @@ class RemoteDropdownButton extends HookWidget {
       return null;
     }, [value]);
 
-    return DropdownButton(
+    return DropdownButton<dynamic>(
       onChanged: (selected) {
         selectedValue.value = selected;
-        RemoteManagerWidget.of(context).onChanges(id, selected, associatedData: RemoteWidgetData.of(context).data);
+        RemoteManagerWidget.of(context)?.onChanges(id, selected, associatedData: RemoteWidgetData.of(context)?.data);
       },
       items: dropItems,
       elevation: elevation,

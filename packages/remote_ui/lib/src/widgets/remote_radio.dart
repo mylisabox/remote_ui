@@ -6,12 +6,12 @@ class RemoteRadio extends HookWidget {
   final String id;
   final bool value;
   final groupValue;
-  final Color activeColor;
+  final Color? activeColor;
 
   const RemoteRadio({
-    Key key,
-    this.id,
-    this.value,
+    Key? key,
+    required this.id,
+    required this.value,
     this.activeColor,
     this.groupValue,
   }) : super(key: key);
@@ -24,10 +24,10 @@ class RemoteRadio extends HookWidget {
       return null;
     }, [value]);
 
-    return Radio(
+    return Radio<bool>(
       onChanged: (selected) {
-        checked.value = selected;
-        RemoteManagerWidget.of(context).onChanges(id, selected, associatedData: RemoteWidgetData.of(context).data);
+        checked.value = selected!;
+        RemoteManagerWidget.of(context)?.onChanges(id, selected, associatedData: RemoteWidgetData.of(context)?.data);
       },
       value: value,
       activeColor: activeColor,

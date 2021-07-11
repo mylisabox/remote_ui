@@ -5,15 +5,15 @@ import 'package:remote_ui/remote_ui.dart';
 class RemoteSwitch extends HookWidget {
   final String id;
   final bool value;
-  final Color activeColor;
-  final Color activeTrackColor;
-  final Color inactiveThumbColor;
-  final Color inactiveTrackColor;
+  final Color? activeColor;
+  final Color? activeTrackColor;
+  final Color? inactiveThumbColor;
+  final Color? inactiveTrackColor;
 
   const RemoteSwitch({
-    Key key,
-    this.id,
-    this.value,
+    Key? key,
+    required this.id,
+    required this.value,
     this.activeColor,
     this.activeTrackColor,
     this.inactiveThumbColor,
@@ -31,7 +31,7 @@ class RemoteSwitch extends HookWidget {
     return Switch(
       onChanged: (selected) {
         checked.value = selected;
-        RemoteManagerWidget.of(context).onChanges(id, selected, associatedData: RemoteWidgetData.of(context).data);
+        RemoteManagerWidget.of(context)?.onChanges(id, selected, associatedData: RemoteWidgetData.of(context)?.data);
       },
       value: value,
       activeColor: activeColor,

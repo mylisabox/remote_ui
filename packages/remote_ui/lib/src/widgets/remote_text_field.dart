@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:remote_ui/remote_ui.dart';
 
 class RemoteTextField extends HookWidget {
   final String id;
-  final String validator;
+  final String? validator;
   final bool required;
-  final String validatorErrorMessage;
+  final String? validatorErrorMessage;
   final bool obscureText;
   final TextAlign textAlign;
   final bool autofocus;
@@ -15,68 +16,70 @@ class RemoteTextField extends HookWidget {
   final bool enabled;
   final bool enableInteractiveSelection;
   final bool maxLengthEnforced;
+  final MaxLengthEnforcement? maxLengthEnforcement;
   final TextCapitalization textCapitalization;
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
   final TextInputAction textInputAction;
-  final Color cursorColor;
-  final TextDirection textDirection;
-  final Radius cursorRadius;
+  final Color? cursorColor;
+  final TextDirection? textDirection;
+  final Radius? cursorRadius;
   final double cursorWidth;
-  final int maxLength;
-  final int maxLines;
-  final int minLines;
+  final int? maxLength;
+  final int? maxLines;
+  final int? minLines;
   final InputDecoration decoration;
-  final Brightness keyboardAppearance;
+  final Brightness? keyboardAppearance;
   final String text;
 
   const RemoteTextField({
-    Key key,
-    this.id,
+    Key? key,
+    required this.id,
     this.validator,
-    this.required,
+    required this.required,
     this.validatorErrorMessage,
-    this.obscureText,
-    this.textAlign,
-    this.autofocus,
-    this.autocorrect,
-    this.expands,
-    this.enabled,
-    this.enableInteractiveSelection,
-    this.maxLengthEnforced,
-    this.textCapitalization,
+    this.maxLengthEnforcement,
+    required this.obscureText,
+    required this.textAlign,
+    required this.autofocus,
+    required this.autocorrect,
+    required this.expands,
+    required this.enabled,
+    required this.enableInteractiveSelection,
+    required this.maxLengthEnforced,
+    required this.textCapitalization,
     this.keyboardType,
-    this.textInputAction,
+    required this.textInputAction,
     this.cursorColor,
     this.textDirection,
     this.cursorRadius,
-    this.cursorWidth,
+    required this.cursorWidth,
     this.maxLength,
     this.maxLines,
     this.minLines,
     this.keyboardAppearance,
-    this.decoration,
-    this.text,
+    required this.decoration,
+    required this.text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = useMemoized(() => TextEditingController(text: text), [text]);
     useEffect(() => controller.dispose, [controller]);
-    final error = useState<String>(null);
+    final error = useState<String?>(null);
 
     return TextField(
       controller: controller,
       onChanged: (text) {
-        RemoteManagerWidget.of(context).onChanges(id, text, associatedData: RemoteWidgetData.of(context).data);
+        RemoteManagerWidget.of(context)?.onChanges(id, text, associatedData: RemoteWidgetData.of(context)?.data);
         error.value = null;
-        if (validator != null && !RegExp(validator).hasMatch(text)) {
+        if (validator != null && !RegExp(validator!).hasMatch(text)) {
           error.value = validatorErrorMessage ?? 'Field incorrect, should respect $validator';
         }
       },
       onSubmitted: (text) {
-        RemoteManagerWidget.of(context).onChanges(id, text, associatedData: RemoteWidgetData.of(context).data);
+        RemoteManagerWidget.of(context)?.onChanges(id, text, associatedData: RemoteWidgetData.of(context)?.data);
         error.value = null;
-        if (validator == null || RegExp(validator).hasMatch(text)) {
+        if (validator == null || RegExp(validator!).hasMatch(text)) {
           if (textInputAction == TextInputAction.next) {
             FocusScope.of(context).focusInDirection(TraversalDirection.down);
           } else {
@@ -93,7 +96,9 @@ class RemoteTextField extends HookWidget {
       expands: expands,
       enabled: enabled,
       enableInteractiveSelection: enableInteractiveSelection,
+      // ignore: deprecated_member_use
       maxLengthEnforced: maxLengthEnforced,
+      maxLengthEnforcement: maxLengthEnforcement,
       textCapitalization: textCapitalization,
       keyboardType: keyboardType,
       textInputAction: textInputAction,

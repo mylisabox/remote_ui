@@ -5,29 +5,25 @@ import 'package:flutter_mjpeg/flutter_mjpeg.dart';
 class IpCamera extends HookWidget {
   final String Function() baseUrlProvider;
   final String stream;
-  final String preview;
-  final String id;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
-  final Color color;
+  final Color? color;
 
   const IpCamera({
     this.width,
-    this.baseUrlProvider,
+    required this.baseUrlProvider,
     this.color,
-    this.fit,
+    required this.fit,
     this.height,
-    this.stream,
-    this.preview,
-    this.id,
+    required this.stream,
   });
 
   @override
   Widget build(BuildContext context) {
     final isPlaying = useState(false);
     final streamState = useState(stream);
-    final urlProvider = baseUrlProvider ?? () => '';
+    final urlProvider = baseUrlProvider;
 
     useEffect(() {
       streamState.value = urlProvider() + stream;

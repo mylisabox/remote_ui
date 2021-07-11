@@ -7,8 +7,8 @@ class RaisedButtonParser extends WidgetParser {
     return RaisedButton(
       onPressed: definition['enabled'] ?? true
           ? () {
-              RemoteManagerWidget.of(context).onChanges(factory.getData(definition, data, 'id'), factory.getData(definition, data, 'value'),
-                  associatedData: RemoteWidgetData.of(context).data);
+              RemoteManagerWidget.of(context)?.onChanges(factory.getData(definition, data, 'id'), factory.getData(definition, data, 'value'),
+                  associatedData: RemoteWidgetData.of(context)?.data);
             }
           : null,
       color: definition.containsKey('color') ? Color(factory.getData(definition, data, 'color')) : null,
@@ -26,11 +26,12 @@ class RaisedButtonParser extends WidgetParser {
       focusElevation: definition['focusElevation'],
       disabledElevation: definition['disabledElevation'],
       colorBrightness: definition.containsKey('colorBrightness') ? Brightness.values[definition['colorBrightness']] : null,
-      child: factory.fromJson(context, definition['child'], data) ??
-          Text(
-            factory.getData(definition, data, 'text', defaultValue: '').toString(),
-            textAlign: TextAlign.center,
-          ),
+      child: definition['child'] == null
+          ? Text(
+              factory.getData(definition, data, 'text', defaultValue: '').toString(),
+              textAlign: TextAlign.center,
+            )
+          : factory.fromJson(context, definition['child'], data),
     );
   }
 }

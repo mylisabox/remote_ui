@@ -18,14 +18,14 @@ class ColorPickerInline extends HookWidget with ColorToHex {
   ColorPickerInline({
     this.isOutputHexString = false,
     this.includeAlphaInHexString = true,
-    this.paletteType,
-    this.displayThumbColor,
-    this.enableAlpha,
-    this.enableLabel,
-    this.pickerAreaHeightPercent,
-    this.colorPickerWidth,
-    this.value,
-    this.id,
+    required this.paletteType,
+    required this.displayThumbColor,
+    required this.enableAlpha,
+    required this.enableLabel,
+    required this.pickerAreaHeightPercent,
+    required this.colorPickerWidth,
+    required this.value,
+    required this.id,
   });
 
   @override
@@ -39,8 +39,8 @@ class ColorPickerInline extends HookWidget with ColorToHex {
       pickerColor: valueState.value,
       onColorChanged: (color) {
         valueState.value = color;
-        RemoteManagerWidget.of(context).onChanges(id, isOutputHexString ? toHex(valueState.value, includeAlphaInHexString) : valueState.value.value,
-            associatedData: RemoteWidgetData.of(context).data);
+        RemoteManagerWidget.of(context)?.onChanges(id, isOutputHexString ? toHex(valueState.value, includeAlphaInHexString) : valueState.value.value,
+            associatedData: RemoteWidgetData.of(context)?.data);
       },
       colorPickerWidth: colorPickerWidth,
       displayThumbColor: displayThumbColor,

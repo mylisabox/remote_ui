@@ -6,7 +6,7 @@ class ExpandedParser extends WidgetParser {
   Widget parse(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
     return Expanded(
       flex: factory.getData(definition, data, 'flex', defaultValue: 1),
-      child: factory.fromJson(context, definition['child'], data),
+      child: factory.fromJson(context, definition['child'], data)!,
     );
   }
 }

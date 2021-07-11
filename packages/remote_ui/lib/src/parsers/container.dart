@@ -9,7 +9,7 @@ class ContainerParser extends WidgetParser {
       width: factory.getData(definition, data, 'width'),
       padding: factory.getEdgeInsets(definition['padding']),
       margin: factory.getEdgeInsets(definition['margin']),
-      child: factory.fromJson(context, definition['child'], data),
+      child: factory.fromJson(context, definition['child'] ?? {}, data),
       color: definition.containsKey('color') ? Color(factory.getData(definition, data, 'color')) : null,
     );
   }

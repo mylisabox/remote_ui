@@ -38,11 +38,11 @@ class _IsRequiredFormValidator implements _FormValidator {
 class RemoteFormFactory implements RemoteFactory {
   RemoteFormFactory();
 
-  Widget fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
+  Widget? fromJson(BuildContext context, Map<String, dynamic> definition, Map<String, dynamic> data, RemoteWidgetFactory factory) {
     final formValidator = RemoteFormValidator.of(context);
 
     if (definition['id'] == 'submit') {
-      definition['enabled'] = formValidator.isFormValid();
+      definition['enabled'] = formValidator?.isFormValid() ?? false;
     }
 
     return null;
@@ -52,7 +52,7 @@ class RemoteFormFactory implements RemoteFactory {
 class RemoteFormValidatorProvider extends StatefulWidget {
   final Widget child;
 
-  const RemoteFormValidatorProvider({Key key, this.child}) : super(key: key);
+  const RemoteFormValidatorProvider({Key? key, required this.child}) : super(key: key);
 
   @override
   RemoteFormValidatorProviderState createState() => RemoteFormValidatorProviderState();
@@ -65,7 +65,7 @@ class RemoteFormValidatorProviderState extends State<RemoteFormValidatorProvider
   }
 
   bool isFormValid() {
-    return RemoteFormValidator.of(context).isFormValid();
+    return RemoteFormValidator.of(context)?.isFormValid() ?? false;
   }
 }
 
@@ -73,7 +73,7 @@ class RemoteFormValidator extends InheritedWidget {
   final Map<String, _FormValidator> validators;
   final Map<String, dynamic> formData;
 
-  RemoteFormValidator({Widget child, Key key, this.formData, this.validators = const {}}) : super(key: key, child: child);
+  RemoteFormValidator({required Widget child, Key? key, required this.formData, this.validators = const {}}) : super(key: key, child: child);
 
   bool isFormValid() {
     for (int i = 0; i < validators.entries.length; i++) {
@@ -91,7 +91,7 @@ class RemoteFormValidator extends InheritedWidget {
     return validators != oldWidget.validators;
   }
 
-  static RemoteFormValidator of(BuildContext context) {
+  static RemoteFormValidator? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<RemoteFormValidator>();
   }
 }
@@ -99,25 +99,25 @@ class RemoteFormValidator extends InheritedWidget {
 class RemoteForm extends HookWidget {
   final Map<String, dynamic> definition;
   final Map<String, dynamic> data;
-  final Key validatorKey;
+  final Key? validatorKey;
   final dynamic associatedData;
   final List<RemoteFactory> parsers;
   final RemoteWidgetInteraction onChanges;
   final void Function(Map<String, dynamic> formData, {dynamic associatedData}) onSubmit;
 
   const RemoteForm({
-    Key key,
+    Key? key,
     this.validatorKey,
-    @required this.definition,
-    this.data,
+    required this.definition,
+    required this.data,
     this.associatedData,
-    @required this.onSubmit,
+    required this.onSubmit,
     this.parsers = const [],
-    this.onChanges,
+    required this.onChanges,
   }) : super(key: key);
 
   Map<String, _FormValidator> _findValidators(Map<String, dynamic> definition) {
-    if (definition == null) {
+    if (definition.isEmpty) {
       return <String, _FormValidator>{};
     }
     final Map<String, _FormValidator> validators = {};
@@ -128,7 +128,7 @@ class RemoteForm extends HookWidget {
       validators[definition['id']] = _IsRequiredFormValidator();
     }
 
-    validators.addAll(_findValidators(definition['child']));
+    validators.addAll(_findValidators(definition['child'] ?? {}));
     if (definition['children'] != null) {
       definition['children'].forEach((child) => validators.addAll(_findValidators(child)));
     }
@@ -138,7 +138,7 @@ class RemoteForm extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formData = useState(data ?? <String, dynamic>{});
+    final formData = useState(data);
     final formValidators = useMemoized(() => _findValidators(definition), [definition]);
     return RemoteFormValidator(
       formData: formData.value,
