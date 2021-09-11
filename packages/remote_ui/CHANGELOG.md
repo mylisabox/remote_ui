@@ -1,3 +1,7 @@
+## [0.1.1] - 11/09/2021
+
+* remove hasFloatingPlaceholder usage
+
 ## [0.1.0] - 11/07/2021
 
 * migrate to null safety

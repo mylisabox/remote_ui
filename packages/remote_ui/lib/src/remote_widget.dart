@@ -48,7 +48,7 @@ class RemoteWidgetFactory with ColorHexParser {
         _sliderParser = SliderParser(),
         _flatButtonParser = FlatButtonParser();
 
-  dynamic? getData(Map<String, dynamic> definition, Map<String, dynamic> data, String key, {defaultValue}) {
+  dynamic getData(Map<String, dynamic> definition, Map<String, dynamic> data, String key, {defaultValue}) {
     var definitionData = definition[key];
     if (definitionData is String && definitionData.startsWith('\$') && definitionData.endsWith('\$')) {
       return _getSubData(data, definitionData, defaultValue: defaultValue);
@@ -109,8 +109,6 @@ class RemoteWidgetFactory with ColorHexParser {
       errorMaxLines: definition['errorMaxLines'],
       filled: definition['filled'] ?? false,
       fillColor: definition.containsKey('fillColor') ? Color(parseHex(definition['fillColor'])) : null,
-      // ignore: deprecated_member_use
-      hasFloatingPlaceholder: definition['hasFloatingPlaceholder'] ?? true,
       helperText: definition['helperText'],
       isDense: definition['isDense'] ?? false,
       prefixText: definition['prefixText'],

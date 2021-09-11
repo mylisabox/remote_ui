@@ -1,6 +1,6 @@
 name: remote_ui
 description: Flutter widget to manage UI from a JSON definition
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_ui
 
 environment:
