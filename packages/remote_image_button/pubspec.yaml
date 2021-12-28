@@ -1,6 +1,6 @@
 name: remote_image_button
 description: Image button addon for remote ui package
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/jaumard/remote_ui/tree/master/packages/remote_color_picker
 
 environment:
@@ -8,8 +8,8 @@ environment:
   flutter_sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
-  flutter_svg: ">=0.22.0 <1.0.0"
-  flutter_hooks: ">=0.16.0 <1.0.0"
+  flutter_svg: ">=1.0.0 <2.0.0"
+  flutter_hooks: ">=0.18.0 <1.0.0"
   remote_ui: #">=0.1.0 <1.0.0"
     #path: '../remote_ui'
   flutter:

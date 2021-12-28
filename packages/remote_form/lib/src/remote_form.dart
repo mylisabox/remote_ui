@@ -27,7 +27,7 @@ class _IsRequiredFormValidator implements _FormValidator {
   @override
   bool isValid(value) {
     if (value is String) {
-      return value != null && value.trim().isNotEmpty;
+      return value.trim().isNotEmpty;
     } else if (value is bool) {
       return value;
     }
@@ -156,9 +156,7 @@ class RemoteForm extends HookWidget {
             onChanges: (key, value, {associatedData}) {
               formData.value = Map.from(formData.value)..[key] = value;
 
-              if (onChanges != null) {
-                onChanges(key, value, associatedData: associatedData);
-              }
+              onChanges(key, value, associatedData: associatedData);
               if (key == 'submit') {
                 onSubmit(formData.value, associatedData: associatedData);
               }

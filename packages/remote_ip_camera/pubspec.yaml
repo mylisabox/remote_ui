@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter_mjpeg: ">=2.0.0 <3.0.0"
     #path: '../../../flutter_mjpeg'
-  flutter_hooks: ">=0.16.0 <1.0.0"
+  flutter_hooks: ">=0.18.0 <1.0.0"
   remote_ui: ">=0.1.0 <1.0.0"
     #path: '../remote_ui'
   flutter:
